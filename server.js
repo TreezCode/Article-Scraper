@@ -3,8 +3,7 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const mongoose = require("mongoose");
-const cheerio = require("cheerio");
-const axios = require("axios");
+const routes = require("./routes/userRoutes");
 
 // Initialize Express
 const app = express();
@@ -17,27 +16,26 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
+// Dynamic Mongo db
+let databaseUri = process.env.MONGODB_URI || "mongodb://localhost/leaflyScrape";
+
+// Connect to Mongo Database
+mongoose.connect(databaseUri);
+
 // Config Handlebars
 app.engine(
     "hbs",
     exphbs({
         defaultLayout: "main",
-        extname: ".hbs",
-        layoutsDir: "views/layouts/"
+        extname: ".hbs"
     })
 );
 app.set("view engine", "hbs");
-app.set("views", __dirname + "/views");
 
 // Routes
-require("./routes/userRoutes")(app);
-
-// Connect to Mongo Database
-mongoose.connect("mongodb://localhost/Article-Scraper", { useNewUrlParser: true });
+app.use(routes);
 
 // Start Server
 app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
 });
-
-module.exports = app;

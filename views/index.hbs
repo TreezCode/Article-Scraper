@@ -1,0 +1,22 @@
+
+<h1>Home</h1>
+
+<button id="scrape">Scrape</button>
+
+{{#each articles}}
+
+    <div>
+        <h3>{{this.title}}</h3>
+        <a href="{{this.link}}" target="_blank">View Article</a>
+        <img src="{{this.image}}" alt="Article Thumbnail">
+        <button class="save-btn">Save Article</button>
+        <p>{{this.byline}}</p>
+    </div>
+
+{{/each}}
+
+{{#unless articles.length}}
+
+    <h1>No Saved Articles</h1>
+
+{{/unless}}
