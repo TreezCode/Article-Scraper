@@ -55,13 +55,15 @@
         {{!-- Article End --}}
     {{/each}}
 
+    {{!-- No Articles Display Start --}}
     {{#unless articles.length}}
         <div class="jumbotron text-white bg-dark pb-5">
             <hr>
-            <h3 class="display-5 display-custom text-center"> Try Scraping Articles</h3>
+            <h3 class="display-5 display-custom text-center">Try Scraping Articles</h3>
             <hr>
         </div>
     {{/unless}}
+    {{!-- No Articles Display End --}}
 
 </div>
 {{!-- Main Container End --}}
