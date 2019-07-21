@@ -30,14 +30,13 @@ const ArticleSchema = new Schema({
         type: Boolean,
         default: false
     },
-
     // Create "comment" obj to store the Comment id
     // The ref property links the ObjectId to the Comment model
     // This allows us to populate the Article with an associated Comment
-    comment: {
+    comment: [{
         type: Schema.Types.ObjectId,
         ref: "Comment"
-    }
+    }]
 });
 
 // Create model from schema using mongoose's model method

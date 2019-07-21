@@ -29,7 +29,7 @@ router.get("/saved", (req, res) => {
     db.Article.find({ saved: true }).populate("comment").then(articles => {
         res.render("saved", { articles: articles })
     }).catch((err) => {
-        console.log(err);
+        res.json(err);
     });
 })
 
@@ -45,16 +45,17 @@ router.put("/saved/:id", (req, res) => {
     });
 });
 
-// // Display comments for article
-// router.get("/comment/:id", (req, res) => {
+// Unsave article
+router.put("/unsaved/:id", (req, res) => {
 
-//     db.Article.findOne({ _id: req.params.id }).populate("comment").then(dbArticle => {
-//         res.status(200).render("saved");
-//     }).catch(err => {
-//         console.log(err);
-//         res.json(err);
-//     });
-// });
+    // Save request id
+    let id = req.params.id;
+
+    // Update article to "saved: true" in Mongo
+    db.Article.update({ _id: id }, { $set: { saved: req.body.saved }}, result => {
+        res.status(200).json({ message: "Saved Status Changed" });
+    });
+});
 
 // Comment on article
 router.post("/comment", (req, res) => {
@@ -64,13 +65,11 @@ router.post("/comment", (req, res) => {
     
     // Create comment with form data then update article with the created comment
     db.Comment.create({ commentText: req.body.comment }).then(dbComment => {
-        console.log("dbComment: ", dbComment);
         return db.Article.findOneAndUpdate({ _id: req.body.id }, { $push: { comment: dbComment._id } }, {new: true});
     }).then(dbArticle => {
-        console.log("dbArticle:", dbArticle);
+        // Redirect to saved page after article is updated with comment
         res.status(200).redirect("/saved");
     }).catch(err =>{
-        console.log(err);
         res.json(err);
     });
 });
@@ -86,8 +85,8 @@ router.get("/scrape", (req, res) => {
         let $ = cheerio.load(response.data);
 
         // Save total number of articles
-        let count = $("a.leafly-article").length;
-        let total = $("a.leafly-article").length;
+        // let count = $("a.leafly-article").length;
+        // let total = $("a.leafly-article").length;
         
         // Iterate through each leafly article
         $("a.leafly-article").each((i, el) => {
@@ -95,7 +94,7 @@ router.get("/scrape", (req, res) => {
             // Save empty result object
             let result = {};
 
-            // Add the title, link and image as properties of the result object
+            // Add the title, link, image, ect. as properties of the result object
             result.title = $(el).find(".leafly-title").text();
             result.link = $(el).attr("href");
             result.image = $(el).find("img").attr("src");
@@ -108,27 +107,27 @@ router.get("/scrape", (req, res) => {
             db.Article.find({ title }).then(data => {
                 if (data.length === 0) {
                     // Create a new Article with the result object
-                    db.Article.create(result).then( dbArticle => {
-                        // console.log(dbArticle);
-                    }).catch((err) => {
-                        console.log(err);
+                    db.Article.create(result).then( dbArticle => {})
+                    .catch((err) => {
+                        res.json(err);
                     });
                 }
             }).catch(err => {
-                console.log(err);
+                res.json(err);
             });
         });
 
-        // Redirect back to home page
-        res.redirect("/")
+        // Redirect to home page
+        res.status(200).redirect("/")
     });
 });
 
 // Clear all articles from db
 router.get("/clear", (req, res) => {
+
     db.Article.deleteMany({}).then(data => {
-        // Redirect back to home page
-        res.redirect("/");
+        // Redirect to home page
+        res.status(200).redirect("/");
     }).catch(err => {
         console.log(err);
     });

@@ -19,17 +19,17 @@
 
 {{!-- Main Container Start --}}
 <div class="container">
-
+    
     <div class="jumbotron text-white bg-dark pb-5">
         <h2 class="display-4 text-center">Saved Articles</h2>
         <hr>
     </div>
 
+    {{!-- Articles Start --}}
     {{#each articles}}
-
         {{#if saved}}
 
-            {{!-- Article Start --}}
+            {{!-- Article Content Start --}}
             <div class="card text-white bg-dark pt-3 my-3" data-id="{{this.id}}">
                 <div class="row justify-row m-0">
                     <div class="card-header bg-dark col-md-5">
@@ -49,7 +49,7 @@
                     </div>
                 </div>
             </div>
-            {{!-- Article End --}}
+            {{!-- Article Content End --}}
 
             {{!-- Comment Form Start --}}
             <form class="mb-3" action="/comment" method="POST">
@@ -75,31 +75,31 @@
                     <div class="card-body">
                         {{#each comment}}
                             <div class="card-text">
-                                <p>{{commentText}}</p>
+                                <p>{{this.commentText}}</p>
                             </div>
                         {{/each}}
                     </div>
                 </div>
-                <br>
-                <br>
+                <br><br>
+
             {{/if}}
             {{!-- Previous Comments End --}}
 
         {{/if}}
-
     {{/each}}
+    {{!-- Articles End --}}
 
+    {{!-- No Articles Display Start --}}
     {{#unless articles.length}}
 
-        {{!-- No Articles Display Start --}}
         <div class="jumbotron text-white bg-dark pb-5">
             <hr>
             <h3 class="display-5 text-center">No Saved Articles</h3>
             <hr>
         </div>
-        {{!-- No Articles Display End --}}
 
     {{/unless}}
+    {{!-- No Articles Display End --}}
 
 </div>
 {{!-- Main Container End --}}
