@@ -1,0 +1,126 @@
+
+body,
+html {
+    height: 100%;
+    user-select: none;
+}
+
+body {
+    background: url("../img/white-brush.jpg") center center fixed;
+    background-size: cover;
+}
+
+hr {
+    border-color: white;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.navbar {
+    box-shadow: 0 0 10px 5px;
+}
+
+.navbar-brand {
+    font-size: 1.75em;
+}
+
+.jumbotron {
+    box-shadow: 2px 4px 15px 0px black;
+}
+
+.display-4 {
+    color: #77BB1F;
+}
+
+.display-5 {
+    color: #D24627;
+}
+
+.display-custom {
+    color: #77BB1F;
+}
+
+#scrape-btn {
+    background: #6D345E;
+}
+
+#scrape-btn:hover {
+    background: rgb(82, 39, 70);
+}
+
+#clear-btn {
+    background: #D24627;
+}
+
+#clear-btn:hover {
+    background: rgb(155, 52, 29);
+}
+
+.justify-row {
+    justify-content: space-evenly
+}
+
+.card {
+    box-shadow: 2px 4px 15px 0px black;
+}
+
+.article-body {
+    margin-top: 0.75em;
+    margin-bottom: 4em;
+    border-radius: 5px;
+    line-height: 1.75em;
+    user-select: text;
+}
+
+.article-img {
+    border-radius: 5px;
+}
+
+.byline{
+    user-select: text;
+}
+
+.save-btn,
+.unsave-btn,
+.view-btn {
+    color: #77BB1F;
+    transition: all 0.25s;
+}
+
+.save-btn:hover,
+.unsave-btn:hover {
+    color: #D24627;
+}
+
+.view-btn:hover {
+    color: rgb(126, 59, 108);
+}
+
+.bg-dark {
+    background: black !important;
+}
+
+textarea {
+    background: black !important;
+    color: white !important;
+}
+
+.divider {
+    width: 95%;
+    margin-right: auto;
+    margin-left: 1.25em !important;
+}
+
+.btn,
+textarea {
+    border: none;
+}
+
+.btn:focus,
+textarea:focus {
+    outline: 0;
+    box-shadow: none !important;
+    border: none !important;
+}

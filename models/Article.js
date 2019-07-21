@@ -18,6 +18,10 @@ const ArticleSchema = new Schema({
         type: String,
         required: true
     },
+    summary: {
+        type:String,
+        required: true
+    },
     byline: {
         type: String,
         required: true
@@ -27,12 +31,12 @@ const ArticleSchema = new Schema({
         default: false
     },
 
-    // Create "note" obj to store the Note id
-    // The ref property links the ObjectId to the Note model
-    // This allows us to populate the Article with an associated Note
-    note: {
+    // Create "comment" obj to store the Comment id
+    // The ref property links the ObjectId to the Comment model
+    // This allows us to populate the Article with an associated Comment
+    comment: {
         type: Schema.Types.ObjectId,
-        ref: "Note"
+        ref: "Comment"
     }
 });
 
