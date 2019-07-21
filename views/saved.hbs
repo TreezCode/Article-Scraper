@@ -1,7 +1,7 @@
 
 {{!-- Navbar Start --}}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark custom-navbar mb-3">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="https://www.leafly.com/news/all" target="_blank">
         <img class="img-fluid logo" src="/img/leaflyLogo.png" alt="Leafly Logo" style="width: 50px">
         <span class="brand-text"> Leafly Scraper</span>
     </a>
@@ -52,8 +52,8 @@
             {{!-- Article End --}}
 
             {{!-- Comment Form Start --}}
-            <form class="mb-3">
-                <input type="hidden" name="id">
+            <form class="mb-3" action="/comment" method="POST">
+                <input type="hidden" name="id" value="{{this.id}}">
                 <div class="form-group">
                     <label for="comment">Comment</label>
                     <textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
@@ -67,7 +67,7 @@
             {{!-- Previous Comments Start --}}
             {{#if comment}}
                 
-                <div class="card text-white bg-dark my-4">
+                <div class="card text-white bg-dark my-3">
                     <div class="card-header bg-dark">
                         <h5>Previous Comments</h5>
                     </div>
@@ -80,6 +80,8 @@
                         {{/each}}
                     </div>
                 </div>
+                <br>
+                <br>
             {{/if}}
             {{!-- Previous Comments End --}}
 

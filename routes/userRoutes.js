@@ -45,25 +45,27 @@ router.put("/saved/:id", (req, res) => {
     });
 });
 
-// Display comments for article
-router.get("/comment/:id", (req, res) => {
+// // Display comments for article
+// router.get("/comment/:id", (req, res) => {
 
-    db.Article.findOne({ _id: req.params.id }).populate("comment").then(dbArticle => {
-        res.status(200).render("saved");
-    }).catch(err => {
-        console.log(err);
-        res.json(err);
-    });
-});
+//     db.Article.findOne({ _id: req.params.id }).populate("comment").then(dbArticle => {
+//         res.status(200).render("saved");
+//     }).catch(err => {
+//         console.log(err);
+//         res.json(err);
+//     });
+// });
 
 // Comment on article
-router.post("/api/comment/:id", (req, res) => {
+router.post("/comment", (req, res) => {
 
-    console.log("Req.body: ", req.body);
+    // Useful test/debug
+    // console.log(req.body);
     
-    db.Comment.create(req.body).then(dbComment => {
+    // Create comment with form data then update article with the created comment
+    db.Comment.create({ commentText: req.body.comment }).then(dbComment => {
         console.log("dbComment: ", dbComment);
-        return db.Article.findOneAndUpdate({ _id: req.params.id }, { $push: { comment: dbComment._id } }, {new: true});
+        return db.Article.findOneAndUpdate({ _id: req.body.id }, { $push: { comment: dbComment._id } }, {new: true});
     }).then(dbArticle => {
         console.log("dbArticle:", dbArticle);
         res.status(200).redirect("/saved");
