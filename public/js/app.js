@@ -34,5 +34,21 @@ $(document).ready(() => {
             console.log(err);
         });
     });
-    
+
+    // Delete Comment click function
+    $(".delete-comment-btn").on("click", function(event) {
+
+        let id = $(this).data("id");
+
+        // Send PUT request
+        $.ajax({
+            method: "DELETE",
+            url: "/delete/" + id,
+            data: { _id: id }
+        }).then(() => {
+            location.reload();
+        }).catch(err => {
+            console.log(err);
+        });
+    });
 });

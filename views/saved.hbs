@@ -75,7 +75,10 @@
                     <div class="card-body">
                         {{#each comment}}
                             <div class="card-text">
-                                <p>{{this.commentText}}</p>
+                                <div class="d-flex">
+                                    <span>{{this.commentText}}</span>
+                                    <span class="ml-auto"><a class="delete-comment-btn" href="" data-id="{{this._id}}">Delete Comment</a></span>
+                                </div>
                             </div>
                         {{/each}}
                     </div>

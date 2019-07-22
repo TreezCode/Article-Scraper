@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
     res.locals.metaTags = {
         title: "Leafly Scraper • Browse"
     };
-    db.Article.find({ saved: false }).then( articles => {
+    db.Article.find({ saved: false }).sort({ _id: 1 }).then( articles => {
         res.render("index", { articles: articles })
     });
 });
@@ -26,7 +26,7 @@ router.get("/saved", (req, res) => {
     res.locals.metaTags = {
         title: "Leafly Scraper • Saved"
     };
-    db.Article.find({ saved: true }).populate("comment").then(articles => {
+    db.Article.find({ saved: true }).sort({ _id: 1 }).populate("comment").then(articles => {
         res.render("saved", { articles: articles })
     }).catch((err) => {
         res.json(err);
@@ -73,6 +73,18 @@ router.post("/comment", (req, res) => {
         res.json(err);
     });
 });
+
+// Delete comment
+router.delete("/delete/:id" , (req, res) => {
+
+    // Find comment by _id and delete from db
+    db.Comment.deleteOne({ _id: req.params.id }).then(dbComment => {
+        // Redirect to saved page after comment is deleted
+        res.status(200).redirect("/saved");
+    }).catch(err => {
+        red.json(err);
+    });
+})
 
 
 // Scrape Leafly website
@@ -126,7 +138,7 @@ router.get("/scrape", (req, res) => {
 router.get("/clear", (req, res) => {
 
     db.Article.deleteMany({}).then(data => {
-        // Redirect to home page
+        // Redirect to home page after db is cleared
         res.status(200).redirect("/");
     }).catch(err => {
         console.log(err);
