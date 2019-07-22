@@ -40,15 +40,15 @@
                     <hr>
                     <span class="byline">{{this.byline}}</span>  
                 </div>
-                <div class="card-body article-body text-dark bg-white col-md-6 d-flex flex-column">
-                    <h3 class="card-title text-center py-2">{{this.title}}</h3>
-                    <div class="card-text px-2">{{this.summary}}</div>
-                </div>
-            </div>
-            <div class="row m-0">
-                <div class="card-footer bg-dark col-md-6 d-flex justify-content-around ml-auto pt-0">
-                    <a class="view-btn" href="{{this.link}}" target="_blank">View Article</a>
-                    <a class="save-btn" href="" data-id="{{this.id}}">Save Article</a>
+                <div class="col-md-6 d-flex flex-column">
+                    <div class="card-body article-body text-dark bg-white d-flex flex-column">
+                        <h3 class="card-title text-center py-2">{{this.title}}</h3>
+                        <div class="card-text px-2">{{this.summary}}</div>
+                    </div>
+                    <div class="card-footer bg-dark d-flex justify-content-around">
+                        <a class="view-btn" href="{{this.link}}" target="_blank">View Article</a>
+                        <a class="save-btn" href="" data-id="{{this.id}}">Save Article</a>
+                    </div>
                 </div>
             </div>
         </div>

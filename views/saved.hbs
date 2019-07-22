@@ -10,8 +10,8 @@
     </button>
     <div class="collapse navbar-collapse text-center mr-auto" id="navbarNavAltMarkup">
         <div class="navbar-nav ml-auto">
-        <a class="nav-item nav-link" href="/">Home</a>
-        <a class="nav-item nav-link active" href="#">Saved <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="/">Home</a>
+            <a class="nav-item nav-link active" href="#">Saved <span class="sr-only">(current)</span></a>
         </div>
     </div>
 </nav>
@@ -37,15 +37,15 @@
                         <hr>
                         <span class="byline">{{this.byline}}</span>
                     </div>
-                    <div class="card-body article-body text-dark bg-white col-md-6 d-flex flex-column">
-                        <h3 class="card-title text-center py-2">{{this.title}}</h3>
-                        <p class="card-text px-2">{{this.summary}}</p>
-                    </div>
-                </div>
-                <div class="row m-0">
-                    <div class="card-footer bg-dark col-md-7 d-flex justify-content-around ml-auto pt-0">
-                        <a class="view-btn" href="{{this.link}}" target="_blank">View Article</a>
-                        <a class="unsave-btn" href="" data-id="{{this.id}}">Unsave Article</a>
+                    <div class=" col-md-6 d-flex flex-column">
+                        <div class="card-body article-body text-dark bg-white d-flex flex-column">
+                            <h3 class="card-title text-center py-2">{{this.title}}</h3>
+                            <p class="card-text px-2">{{this.summary}}</p>
+                        </div>
+                        <div class="card-footer bg-dark d-flex justify-content-around">
+                            <a class="view-btn" href="{{this.link}}" target="_blank">View Article</a>
+                            <a class="unsave-btn" href="" data-id="{{this.id}}">Unsave Article</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,7 @@
             <form class="mb-3" action="/comment" method="POST">
                 <input type="hidden" name="id" value="{{this.id}}">
                 <div class="form-group">
-                    <label for="comment">Comment:</label>
+                    <h5><label for="comment">Comment:</label></h5>
                     <textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
                 </div>
                 <div class="text-center">

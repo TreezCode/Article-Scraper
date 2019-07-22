@@ -30,16 +30,23 @@ a {
     font-size: 1.75em;
 }
 
+.active {
+    color: #77BB1F !important;
+}
+
 .jumbotron {
     box-shadow: 2px 4px 15px 0px black;
 }
 
 .display-4 {
     color: #77BB1F;
+    font-family: 'Merriweather', serif;
+    font-variant: small-caps;
 }
 
 .display-5 {
     color: #D24627;
+    font-variant: small-caps;
 }
 
 .display-custom {
@@ -48,6 +55,7 @@ a {
 
 #scrape-btn {
     background: #6D345E;
+    box-shadow: 0 0 10px 0px black inset !important;
 }
 
 #scrape-btn:hover {
@@ -56,6 +64,7 @@ a {
 
 #clear-btn {
     background: #D24627;
+    box-shadow: 0 0 10px 0px black inset !important;
 }
 
 #clear-btn:hover {
@@ -70,12 +79,23 @@ a {
     box-shadow: 2px 4px 15px 0px black;
 }
 
+.card-title {
+    font-family: 'Raleway', sans-serif;
+    font-variant: small-caps;
+    background: black;
+    color: #77BB1F;
+    border-radius: 5px;
+    padding: 0.25em;
+    box-shadow: 0 0 10px 0px black!important;
+}
+
 .article-body {
+    font-family: 'Merriweather', serif;
     margin-top: 0.75em;
-    margin-bottom: 4em;
     border-radius: 5px;
     line-height: 1.75em;
     user-select: text;
+    box-shadow: 0 0 10px 0px black inset !important;
 }
 
 .article-img {
@@ -103,11 +123,14 @@ a {
 }
 
 .comment-btn {
-    background: black;
+    background: #6D345E !important;
+    color: white !important;
+    box-shadow: 0 0 10px 0px black inset !important;
 }
 
 .comment-btn:hover {
-    background: #6D345E !important;
+    background: black !important;
+    color: #77BB1F !important;
 }
 
 textarea {

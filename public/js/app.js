@@ -40,7 +40,7 @@ $(document).ready(() => {
 
         let id = $(this).data("id");
 
-        // Send PUT request
+        // Send DELETE request
         $.ajax({
             method: "DELETE",
             url: "/delete/" + id,
