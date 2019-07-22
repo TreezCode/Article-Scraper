@@ -18,6 +18,10 @@ a {
     text-decoration: none !important;
 }
 
+.bg-dark {
+    background: black !important;
+}
+
 .navbar {
     box-shadow: 0 0 10px 5px;
 }
@@ -98,8 +102,12 @@ a {
     color: rgb(126, 59, 108);
 }
 
-.bg-dark {
-    background: black !important;
+.comment-btn {
+    background: black;
+}
+
+.comment-btn:hover {
+    background: #6D345E !important;
 }
 
 textarea {
@@ -107,8 +115,18 @@ textarea {
     color: white !important;
 }
 
+.fa-minus-circle {
+    color: #6D345E !important;
+    transition: all 0.25s;
+}
+
+.fa-minus-circle:hover {
+    color: #D24627 !important;
+    transform: scale(1.25);
+}
+
 .divider {
-    width: 95%;
+    width: 96%;
     margin-right: auto;
     margin-left: 1.25em !important;
 }

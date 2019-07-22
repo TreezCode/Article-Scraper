@@ -55,11 +55,11 @@
             <form class="mb-3" action="/comment" method="POST">
                 <input type="hidden" name="id" value="{{this.id}}">
                 <div class="form-group">
-                    <label for="comment">Comment</label>
+                    <label for="comment">Comment:</label>
                     <textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
                 </div>
                 <div class="text-center">
-                    <button class="btn btn-primary bg-dark comment-btn" data-id="{{this.id}}">Submit Comment</button>
+                    <button class="btn btn-primary comment-btn" data-id="{{this.id}}">Submit Comment</button>
                 </div>
             </form>
             {{!-- Comment Form End --}}
@@ -75,9 +75,9 @@
                     <div class="card-body">
                         {{#each comment}}
                             <div class="card-text">
-                                <div class="d-flex">
+                                <div class="d-flex py-2">
                                     <span>{{this.commentText}}</span>
-                                    <span class="ml-auto"><a class="delete-comment-btn" href="" data-id="{{this._id}}">Delete Comment</a></span>
+                                    <span class="ml-auto"><a class="delete-comment-btn" href="" data-id="{{this._id}}"><i class="fas fa-minus-circle"></i></a></span>
                                 </div>
                             </div>
                         {{/each}}
