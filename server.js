@@ -16,10 +16,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-// Dynamic Mongo db
+// Dynamic Mongo
 let databaseUri = process.env.MONGODB_URI || "mongodb://localhost/leaflyScrape";
 
-// Connect to Mongo Database
+// Connect to Mongo
 mongoose.connect(databaseUri);
 
 // Config Handlebars

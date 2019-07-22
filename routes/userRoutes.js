@@ -36,11 +36,8 @@ router.get("/saved", (req, res) => {
 // Save article
 router.put("/saved/:id", (req, res) => {
 
-    // Save request id
-    let id = req.params.id;
-
-    // Update article to "saved: true" in Mongo
-    db.Article.update({ _id: id }, { $set: { saved: req.body.saved }}, result => {
+    // Update article to "saved: true"
+    db.Article.update({ _id: req.params.id }, { $set: { saved: req.body.saved }}, result => {
         res.status(200).json({ message: "Saved Status Changed" });
     });
 });
@@ -48,11 +45,8 @@ router.put("/saved/:id", (req, res) => {
 // Unsave article
 router.put("/unsaved/:id", (req, res) => {
 
-    // Save request id
-    let id = req.params.id;
-
-    // Update article to "saved: true" in Mongo
-    db.Article.update({ _id: id }, { $set: { saved: req.body.saved }}, result => {
+    // Update article to "saved: false"
+    db.Article.update({ _id: req.params.id }, { $set: { saved: req.body.saved }}, result => {
         res.status(200).json({ message: "Saved Status Changed" });
     });
 });
@@ -65,7 +59,7 @@ router.post("/comment", (req, res) => {
     
     // Create comment with form data then update article with the created comment
     db.Comment.create({ commentText: req.body.comment }).then(dbComment => {
-        return db.Article.findOneAndUpdate({ _id: req.body.id }, { $push: { comment: dbComment._id } }, {new: true});
+        return db.Article.findOneAndUpdate({ _id: req.body.id }, { $push: { comment: dbComment._id } }, { new: true });
     }).then(dbArticle => {
         // Redirect to saved page after article is updated with comment
         res.status(200).redirect("/saved");
@@ -82,7 +76,7 @@ router.delete("/delete/:id" , (req, res) => {
         // Redirect to saved page after comment is deleted
         res.status(200).redirect("/saved");
     }).catch(err => {
-        red.json(err);
+        res.json(err);
     });
 })
 
@@ -128,7 +122,6 @@ router.get("/scrape", (req, res) => {
                 res.json(err);
             });
         });
-
         // Redirect to home page
         res.status(200).redirect("/")
     });
@@ -141,7 +134,7 @@ router.get("/clear", (req, res) => {
         // Redirect to home page after db is cleared
         res.status(200).redirect("/");
     }).catch(err => {
-        console.log(err);
+        res.json(err);
     });
 });
 
