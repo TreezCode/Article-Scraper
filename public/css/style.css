@@ -154,6 +154,10 @@ textarea {
     margin-left: 1.25em !important;
 }
 
+.btn {
+    width: 20%;
+}
+
 .btn,
 textarea {
     border: none;
@@ -165,3 +169,15 @@ textarea:focus {
     box-shadow: none !important;
     border: none !important;
 }
+
+@media only screen and (max-width: 600px) {
+   .btn-wrap {
+       flex-direction: column;
+   }
+}
+
+@media only screen and (max-width: 1000px) {
+    .btn {
+        width: auto;
+    }
+ }

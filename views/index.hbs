@@ -20,11 +20,17 @@
 {{!-- Main Container Start --}}
 <div class="container">
 
-    <div class="jumbotron text-white bg-dark pb-5">
+    <div class="jumbotron text-white bg-dark pb-4">
         <h2 class="display-4 text-center">Browse Articles</h2>
         <hr>
+        <div class="btn-wrap d-flex justify-content-around text-center">
+            <a class="btn btn-md btn-primary my-1" id="scrape-btn" href="/scrape">Scrape All</a>
+            <a class="btn btn-md btn-primary my-1" id="scrape-btn" href="/scrapeScience">Scrape Science</a>
+            <a class="btn btn-md btn-primary my-1" id="scrape-btn" href="/scrapeHealth"> Scrape Health</a>
+            <a class="btn btn-md btn-primary my-1" id="scrape-btn" href="/scrape101"> Scrape 101</a>
+        </div>
+        <br>
         <div class="btn-wrap text-center">
-            <a class="btn btn-md btn-primary mx-2" id="scrape-btn" href="/scrape">Scrape Articles</a>
             <a class="btn btn-md btn-primary mx-2" id="clear-btn" href="/clear">Clear Articles</a>
         </div>
     </div>

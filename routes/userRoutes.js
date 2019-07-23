@@ -83,7 +83,7 @@ router.delete("/delete/:id" , (req, res) => {
 })
 
 
-// Scrape Leafly website
+// Scrape All articles
 router.get("/scrape", (req, res) => {
 
     // Grab html body with axios
@@ -124,6 +124,133 @@ router.get("/scrape", (req, res) => {
         res.status(200).redirect("/");
     });
 });
+
+// Scrape Science articles
+router.get("/scrapeScience", (req, res) => {
+
+    // Grab html body with axios
+    axios.get("https://www.leafly.com/news/category/science-tech").then(response => {
+        
+        // Load response into cheerio and save as variable
+        let $ = cheerio.load(response.data);
+        
+        // Iterate through each leafly article
+        $("a.leafly-article").each((i, el) => {
+
+            // Save empty result object
+            let result = {};
+
+            // Add the title, link, image, ect. as properties of the result object
+            result.title = $(el).find(".leafly-title").text();
+            result.link = $(el).attr("href");
+            result.image = $(el).find("img").attr("src");
+            result.summary = $(el).find(".leafly-excerpt").text();
+            result.byline = $(el).find(".leafly-byline").text();
+            
+            let title = result.title;
+
+            // Check if article already exists in db to avoid duplicate articles
+            db.Article.find({ title }).then(data => {
+                if (data.length === 0) {
+                    // Create a new Article with the result object
+                    db.Article.create(result).then( dbArticle => {
+                    }).catch(err => {
+                        res.json(err);
+                    });
+                }
+            }).catch(err => {
+                res.json(err);
+            });
+        });
+        // Redirect to home page
+        res.status(200).redirect("/");
+    });
+});
+
+// Scrape Cannabis 101 articles
+router.get("/scrape101", (req, res) => {
+
+    // Grab html body with axios
+    axios.get("https://www.leafly.com/news/category/cannabis-101").then(response => {
+        
+        // Load response into cheerio and save as variable
+        let $ = cheerio.load(response.data);
+        
+        // Iterate through each leafly article
+        $("a.leafly-article").each((i, el) => {
+
+            // Save empty result object
+            let result = {};
+
+            // Add the title, link, image, ect. as properties of the result object
+            result.title = $(el).find(".leafly-title").text();
+            result.link = $(el).attr("href");
+            result.image = $(el).find("img").attr("src");
+            result.summary = $(el).find(".leafly-excerpt").text();
+            result.byline = $(el).find(".leafly-byline").text();
+            
+            let title = result.title;
+
+            // Check if article already exists in db to avoid duplicate articles
+            db.Article.find({ title }).then(data => {
+                if (data.length === 0) {
+                    // Create a new Article with the result object
+                    db.Article.create(result).then( dbArticle => {
+                    }).catch(err => {
+                        res.json(err);
+                    });
+                }
+            }).catch(err => {
+                res.json(err);
+            });
+        });
+        // Redirect to home page
+        res.status(200).redirect("/");
+    });
+});
+
+// Scrape Health articles
+router.get("/scrape101", (req, res) => {
+
+    // Grab html body with axios
+    axios.get("https://www.leafly.com/news/category/cannabis-101").then(response => {
+        
+        // Load response into cheerio and save as variable
+        let $ = cheerio.load(response.data);
+        
+        // Iterate through each leafly article
+        $("a.leafly-article").each((i, el) => {
+
+            // Save empty result object
+            let result = {};
+
+            // Add the title, link, image, ect. as properties of the result object
+            result.title = $(el).find(".leafly-title").text();
+            result.link = $(el).attr("href");
+            result.image = $(el).find("img").attr("src");
+            result.summary = $(el).find(".leafly-excerpt").text();
+            result.byline = $(el).find(".leafly-byline").text();
+            
+            let title = result.title;
+
+            // Check if article already exists in db to avoid duplicate articles
+            db.Article.find({ title }).then(data => {
+                if (data.length === 0) {
+                    // Create a new Article with the result object
+                    db.Article.create(result).then( dbArticle => {
+                    }).catch(err => {
+                        res.json(err);
+                    });
+                }
+            }).catch(err => {
+                res.json(err);
+            });
+        });
+        // Redirect to home page
+        res.status(200).redirect("/");
+    });
+});
+
 
 // Clear all articles from db
 router.get("/clear", (req, res) => {
