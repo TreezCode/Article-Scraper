@@ -56,7 +56,7 @@ This application is formatted in a basic MVC style for organized modulization.
 
 **Main Functionality**
 
-The app's main function is initialized when the user clicks *Scrape Articles*, which will hit GET route to retrieve data: 
+The app's main function is initialized when the user clicks *Scrape Articles*, which will hit a GET route to retrieve data useing *Axios* and *Cheerio*: 
 
 ```
 axios.get("https://www.leafly.com/news/all").then(response => {
