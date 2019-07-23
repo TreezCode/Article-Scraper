@@ -56,7 +56,7 @@ This application is formatted in a basic MVC style for organized modulization.
 
 **Main Functionality**
 
-The app's main function is initialized when the user clicks *Scrape Articles*, which will hit a GET route to retrieve data useing *Axios* and *Cheerio*: 
+The app's main function is initialized when the user clicks *Scrape Articles*, which will hit a GET route to retrieve data using *Axios* and *Cheerio*: 
 
 ```
 axios.get("https://www.leafly.com/news/all").then(response => {
@@ -68,7 +68,7 @@ axios.get("https://www.leafly.com/news/all").then(response => {
     $("a.leafly-article").each((i, el) => {
 ```
 
-The data is saved as a "result" object, which is then used to create a *Collection* in Mongo DB using *Mongoose*:
+The data is saved as a "result" object, which is then used to create a *Collection* in MongoDB using *Mongoose*:
 
 ```
 // Save empty result object
