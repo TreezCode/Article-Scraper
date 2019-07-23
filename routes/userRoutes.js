@@ -167,11 +167,11 @@ router.get("/scrapeScience", (req, res) => {
     });
 });
 
-// Scrape Cannabis 101 articles
-router.get("/scrape101", (req, res) => {
+// Scrape Health articles
+router.get("/scrapeHealth", (req, res) => {
 
     // Grab html body with axios
-    axios.get("https://www.leafly.com/news/category/cannabis-101").then(response => {
+    axios.get("https://www.leafly.com/news/category/health").then(response => {
         
         // Load response into cheerio and save as variable
         let $ = cheerio.load(response.data);
@@ -209,7 +209,7 @@ router.get("/scrape101", (req, res) => {
     });
 });
 
-// Scrape Health articles
+// Scrape Cannabis 101 articles
 router.get("/scrape101", (req, res) => {
 
     // Grab html body with axios
