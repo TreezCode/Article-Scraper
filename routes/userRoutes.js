@@ -16,6 +16,8 @@ router.get("/", (req, res) => {
     };
     db.Article.find({ saved: false }).sort({ _id: 1 }).then( articles => {
         res.render("index", { articles: articles })
+    }).catch(err => {
+        res.json(err);
     });
 });
 
@@ -28,7 +30,7 @@ router.get("/saved", (req, res) => {
     };
     db.Article.find({ saved: true }).sort({ _id: 1 }).populate("comment").then(articles => {
         res.render("saved", { articles: articles })
-    }).catch((err) => {
+    }).catch(err => {
         res.json(err);
     });
 })
@@ -89,10 +91,6 @@ router.get("/scrape", (req, res) => {
         
         // Load response into cheerio and save as variable
         let $ = cheerio.load(response.data);
-
-        // Save total number of articles
-        // let count = $("a.leafly-article").length;
-        // let total = $("a.leafly-article").length;
         
         // Iterate through each leafly article
         $("a.leafly-article").each((i, el) => {
@@ -113,8 +111,8 @@ router.get("/scrape", (req, res) => {
             db.Article.find({ title }).then(data => {
                 if (data.length === 0) {
                     // Create a new Article with the result object
-                    db.Article.create(result).then( dbArticle => {})
-                    .catch((err) => {
+                    db.Article.create(result).then( dbArticle => {
+                    }).catch(err => {
                         res.json(err);
                     });
                 }

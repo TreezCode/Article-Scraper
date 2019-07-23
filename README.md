@@ -54,76 +54,90 @@ This application is formatted in a basic MVC style for organized modulization.
 └── server.js
 ```
 
-<!-- **API Routes**
+**Main Functionality**
 
-`apiRoutes.js` includes the following two routes:
+The app's main function is initialized when the user clicks *Scrape Articles*, which will hit GET route to retrieve data: 
 
-* A GET route with the URL */api/friends*. This is used to display a JSON of all possible friends.
-
-``` 
-    // Display a JSON of all possible friends
-    app.get("/api/friends", function(req, res) {
-        return res.json(data)
-    });
+```
+axios.get("https://www.leafly.com/news/all").then(response => {
     
+    // Load response into cheerio and save as variable
+    let $ = cheerio.load(response.data);
+    
+    // Iterate through each leafly article
+    $("a.leafly-article").each((i, el) => {
 ```
 
-* A POST route with the URL */api/friends*. This is used to handle incoming survey results. This route is also used to handle the compatibility logic.
+The data is saved as a "result" object, which is then used to create a *Collection* in Mongo DB using *Mongoose*:
 
 ```
-    // Handle incoming survey results and handle the compatibilty logic
-    app.post("/api/friends", function(req, res) {
-        
-        // Store new user object
-        let newUser = req.body;
-        
-        // Store new user score
-        let userScore = newUser.scores;
+// Save empty result object
+let result = {};
 
-        // Create variables to hold best match data
-        let matchIndex = 0;
-        let minDifference = 500;
-        
-        let tilde = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+// Add the title, link, image, ect. as properties of the result object
+result.title = $(el).find(".leafly-title").text();
+result.link = $(el).attr("href");
+result.image = $(el).find("img").attr("src");
+result.summary = $(el).find(".leafly-excerpt").text();
+result.byline = $(el).find(".leafly-byline").text();
 
-        // Iterate thu friends data to access score
-        for (let i = 0; i < data.length; i ++) {
-            
-            // Store each friend score array
-            let friendScore = data[i].scores;
+let title = result.title;
 
-            // Reset diff & total difference
-            let totalDifference = 0;   
-            let diff = 0;
+// Check if article already exists in db to avoid duplicate articles
+db.Article.find({ title }).then(data => {
+    if (data.length === 0) {
 
-            // Iterate thru each friend score array for compatibility logic
-            for (let j = 0; j < friendScore.length; j ++) {
-                
-                // Calculate absolute difference between each user score and friend score
-                diff = Math.abs(friendScore[j] - userScore[j]);
-                totalDifference += diff;
-                
-            }
+        // Create a new Article with the result object
+        db.Article.create(result).then( dbArticle => {
+        }).catch(err => {
+            res.json(err);
+        });
+    }
+}).catch(err => {
+    res.json(err);
+});
+```
 
-            // Determine lowest total difference and set as best match
-            if (totalDifference < minDifference) {
+Once we have a collection of *Documents* in our database, we are able to display them to the user dependent on certain properties:
 
-                // If new lowest difference then set match index to current friend
-                matchIndex = i;
+```
+// Display home page
+router.get("/", (req, res) => {
 
-                // If new lowest difference then set minDifference to current lowest totalDifference
-                minDifference = totalDifference;
-                
-            }
-        }
-
-        // Push newUser to data array
-        data.push(newUser);
-
-        // Send browser the best match data
-        res.status(200).json(data[matchIndex]);
+    // Meta tags sent to hbs
+    res.locals.metaTags = {
+        title: "Leafly Scraper • Browse"
+    };
+    db.Article.find({ saved: false }).sort({ _id: 1 }).then( articles => {
+        res.render("index", { articles: articles })
+    }).catch(err => {
+        res.json(err);
     });
-``` -->
+});
+
+// Display saved articles
+router.get("/saved", (req, res) => {
+
+    // Meta tags sent to hbs
+    res.locals.metaTags = {
+        title: "Leafly Scraper • Saved"
+    };
+    db.Article.find({ saved: true }).sort({ _id: 1 }).populate("comment").then(articles => {
+        res.render("saved", { articles: articles })
+    }).catch(err => {
+        res.json(err);
+    });
+})
+
+// Save article
+router.put("/saved/:id", (req, res) => {
+
+    // Update article to "saved: true"
+    db.Article.update({ _id: req.params.id }, { $set: { saved: req.body.saved }}, result => {
+        res.status(200).json({ message: "Saved Status Changed" });
+    });
+});
+```
 
 ## Pre-Requisites ✔️
 
@@ -149,22 +163,24 @@ The following steps will get you a copy of the application up and running on you
 4. If all pre-requisites are met, initalize the app by typing the command `node server.js`
 5. Vist your local host and chosen port in your browser and ENJOY!
 
-You will also need to create a Mongo database environment for the article data to live in.
-
 **REMEMBER**
+
+You will also need to create a Mongo database environment for the article data to live in.
 
 Be sure to have *MONGOD* running in your terminal if you are attempting a local connection.
 
 ## Technologies Used 💻
 
+* Axios
+* Cheerio
 * CSS3
 * Express
-* Git
+* Express-Handlebars
 * HTML5
 * Javascript ES6
-* JSON
+* MongoDB
+* Mongoose
 * Node.js
-* NPM
 * VS Code
 
 ## Creator ✋
