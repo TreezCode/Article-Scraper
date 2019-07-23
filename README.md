@@ -143,17 +143,17 @@ OR
 
 The following steps will get you a copy of the application up and running on your local machine for testing and grading puproses.
 
-You will also need to create a Mongo database environment for the article data to live in.
-
-**REMEMBER**
-
-Be sure to have *MONGOD* running in your terminal if you are attempting a local connection.
-
 1. Copy this repository from github by using clone.
 2. Git clone repository in IDE of choice
 3. Navigate to proper directory in IDE
 4. If all pre-requisites are met, initalize the app by typing the command `node server.js`
 5. Vist your local host and chosen port in your browser and ENJOY!
+
+You will also need to create a Mongo database environment for the article data to live in.
+
+**REMEMBER**
+
+Be sure to have *MONGOD* running in your terminal if you are attempting a local connection.
 
 ## Technologies Used 💻
 
