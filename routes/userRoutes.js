@@ -123,7 +123,7 @@ router.get("/scrape", (req, res) => {
             });
         });
         // Redirect to home page
-        res.status(200).redirect("/")
+        res.status(200).redirect("/");
     });
 });
 
