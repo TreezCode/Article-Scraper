@@ -57,7 +57,7 @@ router.put("/unsaved/:id", (req, res) => {
 router.post("/comment", (req, res) => {
 
     // Useful test/debug
-    // console.log(req.body);
+    console.log(req.body);
     
     // Create comment with form data then update article with the created comment
     db.Comment.create({ commentText: req.body.comment }).then(dbComment => {

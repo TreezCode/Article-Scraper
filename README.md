@@ -1,13 +1,12 @@
 # Article-Scraper
 
-<a href="https://leafly-scraper-treez.herokuapp.com/" target="_blank">Leafly Scraper</a>
-
+Demo: [Leafly Scraper](https://leafly-scraper-treez.herokuapp.com/)
 ## About 📖
 Leafly Scraper is a web app that utilizes Mongoose and Cheerio to *scrape* news articles from Leafly.com and handlebars to render them to the HTML. The users are then able to view, save and comment on the latest Leafly news.
 
 ## How to Use 🤔
 
-The user is greeted with an elegant interface upon visiting the deployed heroku domain : [Leafly Scraper](https://leafly-scraper-treez.herokuapp.com/).
+The user is greeted with an elegant interface upon visiting the deployed heroku domain.
 
 <img src= "public/img/leaflyScrape.png" alt="Leafly Scraper" width="100%">
 
