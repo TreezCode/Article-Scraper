@@ -25,7 +25,7 @@ mongoose.connect(databaseUri);
 // Config Handlebars
 app.engine(
     "hbs",
-    exphbs({
+    exphbs.engine({
         defaultLayout: "main",
         extname: ".hbs"
     })
